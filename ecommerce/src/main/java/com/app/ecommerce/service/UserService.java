@@ -31,11 +31,11 @@ public class UserService {
         if (user.getAddress() != null) {
             AddressDTO addressDTO = new AddressDTO();
 
-            addressDTO.setStreet(addressDTO.getStreet());
-            addressDTO.setCity(addressDTO.getCity());
-            addressDTO.setState(addressDTO.getState());
-            addressDTO.setCountry(addressDTO.getCountry());
-            addressDTO.setZipcode(addressDTO.getZipcode());
+            addressDTO.setStreet(user.getAddress().getStreet());
+            addressDTO.setCity(user.getAddress().getCity());
+            addressDTO.setState(user.getAddress().getState());
+            addressDTO.setCountry(user.getAddress().getCountry());
+            addressDTO.setZipcode(user.getAddress().getZipcode());
 
             response.setAddress(addressDTO);
         }
@@ -50,16 +50,18 @@ public class UserService {
         user.setPhone(Optional.ofNullable(userRequest.getPhone()).orElse(user.getPhone()));
 
         if (userRequest.getAddress() != null) {
-            /*Address address = new Address();
 
-            address.setStreet(userRequest.getAddress().getStreet());
-            address.setCity(userRequest.getAddress().getCity());
-            address.setState(userRequest.getAddress().getState());
-            address.setCountry(userRequest.getAddress().getCountry());
-            address.setZipcode(userRequest.getAddress().getZipcode());
+            AddressDTO addressDTO = userRequest.getAddress();
+            Address existingAddress = Optional.ofNullable(user.getAddress()).orElse(new Address());
 
-            user.setAddress(address); */
-            
+            existingAddress.setStreet(Optional.ofNullable(addressDTO.getStreet()).orElse(existingAddress.getStreet()));
+            existingAddress.setCity(Optional.ofNullable(addressDTO.getCity()).orElse(existingAddress.getCity()));
+            existingAddress.setState(Optional.ofNullable(addressDTO.getState()).orElse(existingAddress.getState()));
+            existingAddress.setCountry(Optional.ofNullable(addressDTO.getCountry()).orElse(existingAddress.getCountry()));
+            existingAddress.setZipcode(Optional.ofNullable(addressDTO.getZipcode()).orElse(existingAddress.getZipcode()));
+
+            user.setAddress(existingAddress);
+
 
         }
     }
