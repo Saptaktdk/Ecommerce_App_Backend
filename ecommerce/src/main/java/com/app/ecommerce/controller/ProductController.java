@@ -17,10 +17,10 @@ public class ProductController {
 
     private final ProductService productService;
 
-    /* @GetMapping
-    public List<ResponseEntity<ProductResponse>> getProducts() {
-        return new List<ResponseEntity<ProductResponse>>;
-    } */
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> getProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
+    }
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest) {
@@ -35,6 +35,13 @@ public class ProductController {
         return productService.updateProduct(id, productRequest)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(
+            @PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
