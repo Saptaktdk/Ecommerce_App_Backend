@@ -1,11 +1,14 @@
 package com.app.ecommerce.controller;
 
 import com.app.ecommerce.dto.CartItemRequest;
+import com.app.ecommerce.model.CartItem;
 import com.app.ecommerce.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -13,6 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
 
     private final CartService cartService;
+
+    @GetMapping
+    public ResponseEntity<List<CartItem>> getCart(
+            @RequestHeader("X-User-ID") String userId) {
+        return ResponseEntity.ok(cartService.getCart(userId));
+    }
 
     @PostMapping
     public ResponseEntity<String> addToCart (
