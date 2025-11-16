@@ -2,6 +2,7 @@ package com.app.ecommerce.dto;
 
 import com.app.ecommerce.model.OrderItem;
 import com.app.ecommerce.model.OrderStatus;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class OrderResponse {
     private Long id;
     private BigDecimal totalAmount;
