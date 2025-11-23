@@ -1,0 +1,9 @@
+services:
+  api:
+    container_name: ecommerce-app-backend
+    build:
+      context: ecommerce
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
