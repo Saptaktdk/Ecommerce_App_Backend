@@ -3,7 +3,7 @@ FROM maven:3.9.9-eclipse-temurin-24 AS builder
 WORKDIR /main
 COPY pom.xml /main/pom.xml
 COPY src/ /main/src
-RUN mvn clean package -DSkipTests
+RUN mvn clean package -DskipTests
 
 # STAGE 2: Runtime stage
 FROM eclipse-temurin:24-jre
