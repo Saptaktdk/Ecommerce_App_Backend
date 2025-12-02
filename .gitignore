@@ -166,4 +166,4 @@ mvnw.cmd
 
 .idea/
 
-*.ZoneIdentifier
+*_Zone.Identifier
