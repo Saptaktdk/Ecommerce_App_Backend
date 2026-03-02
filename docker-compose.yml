@@ -5,13 +5,14 @@ services:
       context: ecommerce
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
     depends_on:
       - postgres
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/ecommerce_db
       DB_USERNAME: admin
-      DB_PASSWORD: admin
+      DB_PASSWORD: ${DB_PASSWORD}
+      JAVA_OPTS: -Xms256m -Xmx512m
     restart: unless-stopped
 
   postgres:
@@ -19,8 +20,11 @@ services:
     container_name: ecommerce-postgres
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ecommerce_db
-    ports:
-      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
+
+volumes:
+  pgdata:
